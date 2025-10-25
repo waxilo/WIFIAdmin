@@ -53,20 +53,17 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import * as commonHttp from '~/utils/common-http';
 
 const deviceInfo = ref<{ label: string; value: string }[]>([])
-
-
 
 onMounted(() => {
   flushData()
 })
 
-const flushData = () => {
-  deviceInfo.value.push({ label: '设备名称', value: 'FM20' })
-  deviceInfo.value.push({ label: '软件版本', value: 'TEST' })
 
+function flushData() {
+ commonHttp.getInfo()
 }
-
 
 </script>

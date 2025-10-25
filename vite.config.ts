@@ -8,8 +8,21 @@ import VueRouter from 'unplugin-vue-router/vite'
 
 import { defineConfig } from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/admin': {
+        target: 'http://192.168.88.1',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/admin/, '')/*  */
+      },
+      '/8080':{
+        target: 'http://192.168.88.1:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/8080/, '')/*  */
+      }
+    }
+  },
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
